@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<script>
+function validateForm() {
+  var x = document.querySelector("#name").value;
+  if (x == "") {
+    document.getElementById("nameerror").innerHTML = "Name must be filled out";
+    
+    return false;
+  }
+  
+  // EMAIL VALIDATE
+ 
+  function validEmail(email){
+      var re = /\S+@\S+.com/;
+      return re.test(email);
+  }
+  var mail = document.querySelector("#email").value;
+  if (!validEmail(mail) || mail==""){
+      document.getElementById("nameerror").innerHTML = "";
+      document.getElementById("emailerror").innerHTML = "E-mail Yanlýþ veya Boþ";
+      return false;
+  }
+  
+  //ONLY NUMERIC VALIDATE
+  
+  var numeric = document.querySelector("#sayisal").value;
+  if(isNaN(numeric) || numeric==""){
+      document.getElementById("emailerror").innerHTML = "";
+      document.getElementById("sayisalerror").innerHTML = "Sayý Yanlýþ veya Boþ";
+      return false;
+  }
+  
+  // ONLY NUMERIC AND LENGTH
+  
+  var basamakli = document.querySelector("#basamakli").value;
+  if(isNaN(basamakli) || basamakli=="" || basamakli.length!=12){
+      document.getElementById("sayisalerror").innerHTML = "";
+      document.getElementById("basamaklierror").innerHTML = "Sayý Yanlýþ, Eksik veya Boþ";
+      return false;
+  }
+  
+  // ONLY LETTER
+  
+  var alpha = document.querySelector("#alfa").value;
+  var alphatest= /^[a-zA-Z]+$/ ;
+  if(!alphatest.test(alpha) || alpha==""){
+      document.getElementById("basamaklierror").innerHTML = "";
+      document.getElementById("alfaerror").innerHTML = "Harf Dýþýnda Karakter Var veya Boþ";
+      return false;
+  }
+  // ONLY LETTER MAX 30
+  var max30alpha = document.querySelector("#max30").value;
+  if(!alphatest.test(max30alpha) || max30alpha=="" || max30alpha.length>30){
+      document.getElementById("alfaerror").innerHTML = "";
+      document.getElementById("max30error").innerHTML = "Harf Dýþýnda Karakter Var, Boþ veya 30'dan Fazla Karakter Var";
+     
+      return false;
+  }
+  
+  //3 KELIME
+  
+  var uckelime = document.querySelector("#uckelime").value;
+  if(uckelime.split(" ").length !=3 || uckelime==""){
+      document.getElementById("max30error").innerHTML = "";
+      document.getElementById("uckelimeerror").innerHTML = "3 Kelime Deðil veya Boþ";
+     
+      return false;
+  }
+  
+  var passwordtest = /^(?=.*[.,?!])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,}/;
+  var password = document.querySelector("#password").value;
+  if(!passwordtest.test(password) || password==""){
+      document.getElementById("uckelimeerror").innerHTML = "";
+      document.getElementById("passworderror").innerHTML = "Hatalý Password";
+      
+      return false;
+  }
+}
+</script>
+</head>
+<body>
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Aþaðýdaki hiçbir input boþ olmamalý: <br>
+  
+
+  <table style="width:40%">
+  <tr>
+    <td>Boþ olmamalý: </td>
+    <td><input type="text" id="name"></td>
+    <td><output style="color:red; font-size:75%;" id="nameerror"> </td>
+  </tr>
+  <tr>
+    <td>E-mail (Kurallara uygun email): </td>
+    <td><input type="text" id="email"></td>
+    <td><output style="color:red; font-size:75%;" id="emailerror"> </td>
+    
+  </tr>
+  <tr>
+    <td>Sadece sayýsal: </td>
+    <td><input type="text" id="sayisal"></td>
+    <td><output style="color:red; font-size:75%;" id="sayisalerror"> </td>
+  </tr>
+  <tr>
+    <td>Sadece sayýsal olan ve 12 basamak uzunluðundaki sayi: </td>
+    <td><input type="text" id="basamakli"></td>
+    <td><output style="color:red; font-size:75%;" id="basamaklierror"> </td>
+  </tr>
+  <tr>
+    <td>Sadece harf (a..z veya A..Z): </td>
+    <td><input type="text" id="alfa"></td>
+    <td><output style="color:red; font-size:75%;" id="alfaerror"> </td>
+  </tr>
+  <tr>
+    <td>Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+    <td><input type="text" id="max30"></td>
+    <td><output style="color:red; font-size:75%;" id="max30error"> </td>
+  </tr>
+  <tr>
+    <td>3 kelimeden oluþan string: </td>
+    <td><input type="text" id="uckelime"></td>
+    <td><output style="color:red; font-size:75%;" id="uckelimeerror"> </td>
+  </tr>
+  <tr>
+    <td>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama iþareti içeren ve en az 8 uzunluðunda olan metin: </td>
+    <td><input type="text" id="password"></td>
+    <td><output style="color:red; font-size:75%;" id="passworderror"> </td>
+  </tr>
+  
+
+</table>
+
+<br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
